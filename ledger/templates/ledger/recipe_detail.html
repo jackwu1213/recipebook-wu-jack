@@ -1,0 +1,24 @@
+{% extends "ledger/base.html" %}
+
+{% block content %}
+    <h2 style="margin-top: 0;">{{ name }}</h2>
+
+    <p class="subtitle">Ingredients</p>
+
+    <ul style="padding-left: 18px; margin-top: 0;">
+        {% for ingredient in ingredients %}
+            <li style="margin-bottom: 4px;">
+                <strong>{{ ingredient.name }}</strong>
+                <span style="color: #4a5568;">– {{ ingredient.quantity }}</span>
+            </li>
+        {% empty %}
+            <li>No ingredients listed.</li>
+        {% endfor %}
+    </ul>
+
+    <p style="margin-top: 16px;">
+        <a href="/recipes/list">Back to recipe list</a>
+    </p>
+{% endblock %}
+
+
