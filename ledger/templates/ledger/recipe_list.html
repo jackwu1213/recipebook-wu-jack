@@ -6,12 +6,12 @@
     <ul style="list-style: none; padding: 0; margin: 0;">
         {% for recipe in recipes %}
             <li style="margin-bottom: 12px;">
-                <a href="{{ recipe.link }}"
+                <a href="{{ recipe.get_absolute_url }}"
                    style="display: block; padding: 10px 12px; border-radius: 8px;
                           border: 1px solid #e2e8f0; background-color: #fdfdfd;">
                     <strong>{{ recipe.name }}</strong>
                     <div class="subtitle" style="margin-top: 4px;">
-                        {{ recipe.ingredients|length }} ingredient{{ recipe.ingredients|length|pluralize }}
+                        {{ recipe.ingredients.count }} ingredient{{ recipe.ingredients.count|pluralize }}
                     </div>
                 </a>
             </li>
@@ -20,5 +20,3 @@
         {% endfor %}
     </ul>
 {% endblock %}
-
-
