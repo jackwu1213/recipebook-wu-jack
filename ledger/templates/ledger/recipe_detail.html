@@ -1,14 +1,14 @@
 {% extends "ledger/base.html" %}
 
 {% block content %}
-    <h2 style="margin-top: 0;">{{ name }}</h2>
+    <h2 style="margin-top: 0;">{{ recipe.name }}</h2>
 
     <p class="subtitle">Ingredients</p>
 
     <ul style="padding-left: 18px; margin-top: 0;">
-        {% for ingredient in ingredients %}
+        {% for ingredient in recipe.ingredients.all %}
             <li style="margin-bottom: 4px;">
-                <strong>{{ ingredient.name }}</strong>
+                <strong>{{ ingredient.ingredient.name }}</strong>
                 <span style="color: #4a5568;">– {{ ingredient.quantity }}</span>
             </li>
         {% empty %}
@@ -17,8 +17,6 @@
     </ul>
 
     <p style="margin-top: 16px;">
-        <a href="/recipes/list">Back to recipe list</a>
+        <a href="{% url 'ledger:recipe_list' %}">Back to recipe list</a>
     </p>
 {% endblock %}
-
-
