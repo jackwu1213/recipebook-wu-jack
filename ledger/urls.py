@@ -7,4 +7,7 @@ app_name = "ledger"
 urlpatterns = [
     path("recipes/list", views.recipe_list, name="recipe_list"),
     path("recipe/<int:pk>", views.recipe_detail, name="recipe_detail"),
+    path("login/", views.user_login, name="login"),
+    path("logout/", views.user_logout, name="logout"),
+    path("password-reset/", views.password_reset, name="password_reset"),
 ]

@@ -1,7 +1,11 @@
 {% extends "ledger/base.html" %}
 
 {% block content %}
-    <h2 style="margin-top: 0;">{{ recipe.name }}</h2>
+    <h2 class="page-heading">{{ recipe.name }}</h2>
+
+    {% if recipe.author %}
+        <p class="subtitle">By {{ recipe.author.name }}</p>
+    {% endif %}
 
     <p class="subtitle">Ingredients</p>
 

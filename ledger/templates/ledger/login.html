@@ -1,0 +1,27 @@
+{% extends "ledger/base.html" %}
+
+{% block title %}Login - Recipe Book{% endblock %}
+
+{% block content %}
+    <h2 class="page-heading">Login</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p style="margin-top: 16px;">
+        <a href="{% url 'ledger:password_reset' %}">Forgot your password?</a>
+    </p>
+{% endblock %}

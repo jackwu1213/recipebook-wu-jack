@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Recipe Book</title>
+    <title>{% block title %}Recipe Book{% endblock %}</title>
     <style>
         :root {
             --accent-color: #2c7a7b;
@@ -34,12 +34,44 @@
             border-bottom: 2px solid var(--border-color);
             margin-bottom: 24px;
             padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         header h1 {
             margin: 0;
             font-size: 1.8rem;
             letter-spacing: 0.03em;
+        }
+
+        .auth-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .auth-links a, .auth-links button {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border: 1px solid var(--accent-color);
+            background-color: white;
+            color: var(--accent-color);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .auth-links a:hover, .auth-links button:hover {
+            background-color: var(--accent-light);
+            text-decoration: none;
+        }
+
+        .page-heading {
+            margin-top: 0;
+            margin-bottom: 16px;
+            font-size: 1.5rem;
+            color: var(--text-color);
         }
 
         main {
@@ -65,18 +97,99 @@
             color: var(--muted-text);
             font-size: 0.95rem;
         }
+
+        .messages {
+            margin-bottom: 16px;
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .message.error {
+            background-color: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+        }
+
+        .message.success {
+            background-color: #efe;
+            border: 1px solid #cfc;
+            color: #3c3;
+        }
+
+        form {
+            max-width: 400px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #236363;
+        }
     </style>
 </head>
 <body>
 <div class="page">
     <header>
         <h1>Recipe Book</h1>
+        <div class="auth-links">
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'ledger:logout' %}" style="margin: 0;">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'ledger:login' %}">Login</a>
+            {% endif %}
+        </div>
     </header>
     <main>
+        {% if page_heading %}
+            <h2 class="page-heading">{{ page_heading }}</h2>
+        {% endif %}
+        
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
         {% block content %}{% endblock %}
     </main>
 </div>
 </body>
 </html>
-
-
