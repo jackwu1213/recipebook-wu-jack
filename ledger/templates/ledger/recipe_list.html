@@ -5,6 +5,12 @@
     
     <p class="subtitle">Browse the available recipes and click to view their ingredients.</p>
 
+    {% if user.is_authenticated %}
+        <p style="margin-bottom: 20px;">
+            <a href="{% url 'ledger:recipe_add' %}">Add a new recipe</a>
+        </p>
+    {% endif %}
+
     <ul style="list-style: none; padding: 0; margin: 0;">
         {% for recipe in recipes %}
             <li style="margin-bottom: 12px;">

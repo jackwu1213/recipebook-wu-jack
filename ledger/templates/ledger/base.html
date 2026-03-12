@@ -135,13 +135,33 @@
         }
 
         input[type="text"],
-        input[type="password"] {
+        input[type="password"],
+        input[type="file"],
+        textarea {
             width: 100%;
             padding: 8px 12px;
             border: 1px solid var(--border-color);
             border-radius: 6px;
             font-size: 1rem;
             font-family: inherit;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .helptext {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted-text);
+            font-size: 0.85rem;
+        }
+
+        .errorlist {
+            margin: 6px 0 0;
+            padding-left: 18px;
+            color: #c53030;
         }
 
         button[type="submit"] {
